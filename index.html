@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080808">
+  <title>MAZÉ — Your World</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --gold: #e8c56a;
+      --light-gold: #fff0b5;
+      --black: #080808;
+      --panel: #111111;
+      --muted: #a5a5a5;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: #fff;
+      background:
+        radial-gradient(ellipse at 50% 5%, #30230c 0%, transparent 43%),
+        var(--black);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 7%;
+      border-bottom: 1px solid #3a2c12;
+    }
+
+    .brand {
+      font-size: 29px;
+      font-weight: 800;
+      letter-spacing: 5px;
+      color: var(--light-gold);
+      text-shadow: 0 0 22px #b88a2e;
+    }
+
+    .status {
+      color: var(--gold);
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    main {
+      min-height: 78vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 42px 18px;
+    }
+
+    .layout {
+      width: 100%;
+      max-width: 950px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 55px;
+      align-items: center;
+    }
+
+    .intro { text-align: center; }
+
+    .emblem {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 24px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      color: var(--light-gold);
+      font-size: 44px;
+      font-weight: bold;
+      box-shadow: 0 0 35px #8e682b55, inset 0 0 22px #b68a3333;
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 18px #8e682b33; }
+      to { box-shadow: 0 0 38px #e8c56a55; }
+    }
+
+    h1 {
+      margin: 0 0 15px;
+      font-size: clamp(29px, 5vw, 43px);
+      color: var(--light-gold);
+      letter-spacing: 1px;
+    }
+
+    .tagline {
+      color: #d6c7a4;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .intro-note {
+      margin-top: 35px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .panel {
+      padding: 30px;
+      background: linear-gradient(145deg, #171717, #0c0c0c);
+      border: 1px solid #8b6b2b;
+      border-radius: 20px;
+      box-shadow: 0 0 35px #b58a2420;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 5px;
+      margin-bottom: 25px;
+      background: #080808;
+      border-radius: 11px;
+    }
+
+    .tab {
+      padding: 12px 5px;
+      color: #aaa;
+      background: transparent;
+      border: 0;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .tab.active {
+      color: #171107;
+      background: linear-gradient(110deg, #c99b3b, #fff0b5);
+      font-weight: bold;
+    }
+
+    h2 {
+      margin: 0 0 8px;
+      font-size: 24px;
+    }
+
+    .hint {
+      margin: 0 0 23px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 8px;
+      color: #e8d9b7;
+      font-size: 13px;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #39342a;
+      border-radius: 9px;
+      background: #090909;
+      color: white;
+      outline: none;
+      font-size: 14px;
+    }
+
+    input:focus { border-color: var(--gold); }
+
+    .submit {
+      width: 100%;
+      margin-top: 23px;
+      padding: 14px;
+      color: #171107;
+      background: linear-gradient(110deg, #c99b3b, #fff0b5, #d9ad50);
+      border: 0;
+      border-radius: 9px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .message {
+      min-height: 20px;
+      margin-top: 15px;
+      color: var(--light-gold);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    footer {
+      padding: 18px;
+      text-align: center;
+      color: #777;
+      border-top: 1px solid #282117;
+      font-size: 12px;
+    }
+
+    @media (max-width: 650px) {
+      .topbar { padding: 18px 6%; }
+      .status { font-size: 10px; }
+      .layout { grid-template-columns: 1fr; gap: 32px; max-width: 420px; }
+      .intro-note { margin-top: 15px; }
+      .emblem { width: 76px; height: 76px; font-size: 34px; }
+      .panel { padding: 23px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">MAZÉ</div>
+    <div class="status">A WORLD OF YOUR OWN</div>
+  </header>
+
+  <main>
+    <div class="layout">
+      <section class="intro">
+        <div class="emblem">M</div>
+        <h1>Welcome to MAZÉ</h1>
+        <div class="tagline">
+          Your Space. Your People. Your World.
+        </div>
+        <p class="intro-note">
+          A place to connect, share and belong.<br>
+          Your world begins here.
+        </p>
+      </section>
+
+      <section class="panel">
+        <div class="tabs">
+          <button class="tab active" id="loginTab" type="button">
+            Log In
+          </button>
+          <button class="tab" id="signupTab" type="button">
+            Sign Up
+          </button>
+        </div>
+
+        <h2 id="formTitle">Welcome back</h2>
+        <p class="hint" id="formHint">
+          Enter your details to continue your journey.
+        </p>
+
+        <form id="accountForm">
+          <div id="nameField" hidden>
+            <label for="displayName">Display name</label>
+            <input id="displayName" name="displayName"
+              autocomplete="name" placeholder="Your display name">
+          </div>
+
+          <label for="email">Email address</label>
+          <input id="email" name="email" type="email"
+            autocomplete="email" placeholder="you@example.com" required>
+
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password"
+            autocomplete="current-password" minlength="8"
+            placeholder="At least 8 characters" required>
+
+          <button class="submit" id="submitButton" type="submit">
+            Enter MAZÉ
+          </button>
+
+          <p class="message" id="message" role="status"></p>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    MAZÉ © Your Space. Your People. Your World.
+  </footer>
+
+  <script>
+    const loginTab = document.getElementById("loginTab");
+    const signupTab = document.getElementById("signupTab");
+    const formTitle = document.getElementById("formTitle");
+    const formHint = document.getElementById("formHint");
+    const nameField = document.getElementById("nameField");
+    const displayName = document.getElementById("displayName");
+    const password = document.getElementById("password");
+    const submitButton = document.getElementById("submitButton");
+    const message = document.getElementById("message");
+    const form = document.getElementById("accountForm");
+
+    let mode = "login";
+
+    function setMode(nextMode) {
+      mode = nextMode;
+      const signup = mode === "signup";
+
+      loginTab.classList.toggle("active", !signup);
+      signupTab.classList.toggle("active", signup);
+      nameField.hidden = !signup;
+      displayName.required = signup;
+      password.autocomplete = signup
+        ? "new-password" : "current-password";
+
+      formTitle.textContent = signup
+        ? "Create your account" : "Welcome back";
+
+      formHint.textContent = signup
+        ? "Join the MAZÉ community."
+        : "Enter your details to continue your journey.";
+
+      submitButton.textContent = signup
+        ? "Create Account" : "Enter MAZÉ";
+
+      message.textContent = "";
+    }
+
+    loginTab.addEventListener("click", () => setMode("login"));
+    signupTab.addEventListener("click", () => setMode("signup"));
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      message.textContent =
+        "The design is ready! Real accounts and secure login " +
+        "will work after we connect an authentication service.";
+    });
+  </script>
+</body>
+</html>
