@@ -5,15 +5,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#080808">
+  <meta name="description" content="MAZÉ — Your Space. Your People. Your World.">
   <title>MAZÉ — Your World</title>
+
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     :root {
-      --gold: #e8c56a;
-      --light-gold: #fff0b5;
-      --black: #080808;
-      --panel: #111111;
+      --black: #070707;
+      --panel: #101010;
+      --gold: #e6bf61;
+      --light-gold: #fff2bf;
+      --silver: #d8dce3;
       --muted: #a5a5a5;
     }
 
@@ -21,198 +26,353 @@
       margin: 0;
       min-height: 100vh;
       color: #fff;
-      background:
-        radial-gradient(ellipse at 50% 5%, #30230c 0%, transparent 43%),
-        var(--black);
       font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(ellipse at 50% 0%, #39280e 0%, transparent 43%),
+        radial-gradient(ellipse at 100% 70%, #171717 0%, transparent 40%),
+        var(--black);
+    }
+
+    button, input {
+      font: inherit;
     }
 
     .topbar {
+      min-height: 82px;
+      padding: 20px 7%;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 22px 7%;
-      border-bottom: 1px solid #3a2c12;
+      justify-content: space-between;
+      gap: 20px;
+      border-bottom: 1px solid #b18b3b55;
+      background: #080808b8;
     }
 
     .brand {
-      font-size: 29px;
-      font-weight: 800;
-      letter-spacing: 5px;
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 6px;
       color: var(--light-gold);
-      text-shadow: 0 0 22px #b88a2e;
+      text-shadow: 0 0 12px #e6bf6166, 0 0 30px #d6a13a55;
     }
 
     .status {
-      color: var(--gold);
-      font-size: 12px;
-      letter-spacing: 2px;
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--silver);
     }
 
     main {
-      min-height: 78vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 42px 18px;
+      min-height: calc(100vh - 145px);
+      padding: 65px 7%;
+      display: grid;
+      place-items: center;
     }
 
     .layout {
       width: 100%;
-      max-width: 950px;
+      max-width: 1080px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 55px;
+      grid-template-columns: 1fr 0.88fr;
       align-items: center;
+      gap: 75px;
     }
 
-    .intro { text-align: center; }
+    .intro {
+      text-align: center;
+    }
+
+    .emblem-wrap {
+      width: 124px;
+      height: 124px;
+      margin: 0 auto 30px;
+      padding: 5px;
+      border-radius: 50%;
+      background: linear-gradient(
+        135deg,
+        #fff4c8,
+        #ad7a21,
+        #f7dc89,
+        #858994,
+        #d6aa48
+      );
+      box-shadow: 0 0 30px #e6bf6133;
+    }
 
     .emblem {
-      width: 100px;
-      height: 100px;
-      margin: 0 auto 24px;
+      width: 100%;
+      height: 100%;
       display: grid;
       place-items: center;
-      border: 1px solid var(--gold);
+      border: 1px solid #ffffff30;
       border-radius: 50%;
+      background: radial-gradient(circle at 35% 25%, #292015, #080808 70%);
       color: var(--light-gold);
-      font-size: 44px;
-      font-weight: bold;
-      box-shadow: 0 0 35px #8e682b55, inset 0 0 22px #b68a3333;
-      animation: glow 3s ease-in-out infinite alternate;
-    }
-
-    @keyframes glow {
-      from { box-shadow: 0 0 18px #8e682b33; }
-      to { box-shadow: 0 0 38px #e8c56a55; }
+      font-size: 53px;
+      font-weight: 900;
+      text-shadow: 0 0 22px #e6bf6188;
     }
 
     h1 {
-      margin: 0 0 15px;
-      font-size: clamp(29px, 5vw, 43px);
+      margin: 0 0 20px;
+      font-size: clamp(32px, 4vw, 48px);
+      letter-spacing: 0.5px;
+      line-height: 1.2;
       color: var(--light-gold);
-      letter-spacing: 1px;
+      text-shadow: 0 0 25px #d7a64133;
     }
 
     .tagline {
-      color: #d6c7a4;
-      line-height: 1.8;
-      font-size: 14px;
+      color: var(--silver);
+      font-size: 15px;
+      line-height: 1.9;
+      letter-spacing: 0.4px;
+    }
+
+    .gold-line {
+      width: 100px;
+      height: 2px;
+      margin: 27px auto;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        var(--gold),
+        var(--silver),
+        var(--gold),
+        transparent
+      );
+      box-shadow: 0 0 12px #e6bf6144;
     }
 
     .intro-note {
-      margin-top: 35px;
       color: var(--muted);
       font-size: 13px;
-      line-height: 1.9;
+      line-height: 2;
     }
 
     .panel {
-      padding: 30px;
-      background: linear-gradient(145deg, #171717, #0c0c0c);
-      border: 1px solid #8b6b2b;
+      position: relative;
+      padding: 34px;
+      overflow: hidden;
+      border: 1px solid transparent;
       border-radius: 20px;
-      box-shadow: 0 0 35px #b58a2420;
+      background:
+        linear-gradient(145deg, #151515, #0a0a0a) padding-box,
+        linear-gradient(
+          135deg,
+          #fff0b5,
+          #886221,
+          #bfc3cc,
+          #5f4a22,
+          #d9b354
+        ) border-box;
+      box-shadow: 0 20px 65px #0009, 0 0 30px #c69b3920;
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 12%;
+      width: 76%;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        #fff0b5,
+        #a8adb7,
+        transparent
+      );
+      opacity: 0.8;
     }
 
     .tabs {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
+      gap: 7px;
       padding: 5px;
-      margin-bottom: 25px;
-      background: #080808;
+      margin-bottom: 28px;
+      border: 1px solid #ffffff0c;
       border-radius: 11px;
+      background: #070707;
     }
 
     .tab {
-      padding: 12px 5px;
-      color: #aaa;
-      background: transparent;
-      border: 0;
+      padding: 13px 8px;
+      border: 1px solid transparent;
       border-radius: 8px;
+      background: transparent;
+      color: #aaa;
       cursor: pointer;
-      font-size: 14px;
+      transition: 0.25s ease;
+    }
+
+    .tab:hover {
+      color: var(--light-gold);
     }
 
     .tab.active {
       color: #171107;
-      background: linear-gradient(110deg, #c99b3b, #fff0b5);
-      font-weight: bold;
+      font-weight: 800;
+      background: linear-gradient(
+        110deg,
+        #ad7a25,
+        #fff0b5 45%,
+        #d6b45e 75%,
+        #f9e5a0
+      );
+      box-shadow: 0 0 18px #e6bf6125;
     }
 
     h2 {
-      margin: 0 0 8px;
-      font-size: 24px;
+      margin: 0 0 10px;
+      font-size: 25px;
+      color: #fff;
     }
 
     .hint {
-      margin: 0 0 23px;
+      margin: 0 0 25px;
       color: var(--muted);
       font-size: 13px;
-      line-height: 1.7;
+      line-height: 1.8;
     }
 
     label {
       display: block;
-      margin: 15px 0 8px;
-      color: #e8d9b7;
+      margin: 17px 0 9px;
+      color: var(--silver);
       font-size: 13px;
     }
 
     input {
       width: 100%;
-      padding: 13px;
-      border: 1px solid #39342a;
-      border-radius: 9px;
-      background: #090909;
+      padding: 14px;
       color: white;
+      background: #080808;
+      border: 1px solid #49443a;
+      border-radius: 9px;
       outline: none;
-      font-size: 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
-    input:focus { border-color: var(--gold); }
+    input::placeholder {
+      color: #777;
+    }
+
+    input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px #e6bf6117;
+    }
 
     .submit {
       width: 100%;
-      margin-top: 23px;
-      padding: 14px;
-      color: #171107;
-      background: linear-gradient(110deg, #c99b3b, #fff0b5, #d9ad50);
-      border: 0;
+      margin-top: 25px;
+      padding: 15px;
+      color: #151108;
+      border: 1px solid #f7e2a0;
       border-radius: 9px;
-      font-weight: bold;
-      font-size: 15px;
+      font-weight: 800;
       cursor: pointer;
+      background: linear-gradient(
+        110deg,
+        #a87928,
+        #fff0b5 32%,
+        #d3d7df 52%,
+        #f7df91 72%,
+        #bd8d32
+      );
+      box-shadow: 0 5px 24px #d8ae4a20;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px #e6bf6144;
+    }
+
+    .submit:active {
+      transform: translateY(0);
     }
 
     .message {
       min-height: 20px;
-      margin-top: 15px;
+      margin: 16px 0 0;
       color: var(--light-gold);
       font-size: 13px;
-      line-height: 1.7;
+      line-height: 1.8;
     }
 
     footer {
-      padding: 18px;
+      padding: 22px 15px;
+      border-top: 1px solid #ffffff12;
+      color: #929292;
       text-align: center;
-      color: #777;
-      border-top: 1px solid #282117;
       font-size: 12px;
+      letter-spacing: 0.4px;
     }
 
-    @media (max-width: 650px) {
-      .topbar { padding: 18px 6%; }
-      .status { font-size: 10px; }
-      .layout { grid-template-columns: 1fr; gap: 32px; max-width: 420px; }
-      .intro-note { margin-top: 15px; }
-      .emblem { width: 76px; height: 76px; font-size: 34px; }
-      .panel { padding: 23px; }
+    footer span {
+      color: var(--gold);
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 760px) {
+      .topbar {
+        padding: 18px 6%;
+      }
+
+      .brand {
+        font-size: 25px;
+      }
+
+      .status {
+        max-width: 125px;
+        text-align: right;
+        line-height: 1.7;
+        font-size: 9px;
+      }
+
+      main {
+        padding: 45px 6%;
+      }
+
+      .layout {
+        max-width: 460px;
+        grid-template-columns: 1fr;
+        gap: 42px;
+      }
+
+      .emblem-wrap {
+        width: 95px;
+        height: 95px;
+        margin-bottom: 24px;
+      }
+
+      .emblem {
+        font-size: 42px;
+      }
+
+      .intro-note {
+        margin-bottom: 0;
+      }
+
+      .panel {
+        padding: 25px 22px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
+
 <body>
   <header class="topbar">
     <div class="brand">MAZÉ</div>
@@ -222,28 +382,45 @@
   <main>
     <div class="layout">
       <section class="intro">
-        <div class="emblem">M</div>
+        <div class="emblem-wrap">
+          <div class="emblem">M</div>
+        </div>
+
         <h1>Welcome to MAZÉ</h1>
+
         <div class="tagline">
           Your Space. Your People. Your World.
         </div>
+
+        <div class="gold-line"></div>
+
         <p class="intro-note">
           A place to connect, share and belong.<br>
           Your world begins here.
         </p>
       </section>
 
-      <section class="panel">
-        <div class="tabs">
-          <button class="tab active" id="loginTab" type="button">
+      <section class="panel" aria-labelledby="formTitle">
+        <div class="tabs" role="group" aria-label="Account options">
+          <button
+            class="tab active"
+            id="loginTab"
+            type="button"
+            aria-pressed="true">
             Log In
           </button>
-          <button class="tab" id="signupTab" type="button">
+
+          <button
+            class="tab"
+            id="signupTab"
+            type="button"
+            aria-pressed="false">
             Sign Up
           </button>
         </div>
 
         <h2 id="formTitle">Welcome back</h2>
+
         <p class="hint" id="formHint">
           Enter your details to continue your journey.
         </p>
@@ -251,31 +428,45 @@
         <form id="accountForm">
           <div id="nameField" hidden>
             <label for="displayName">Display name</label>
-            <input id="displayName" name="displayName"
-              autocomplete="name" placeholder="Your display name">
+            <input
+              id="displayName"
+              name="displayName"
+              autocomplete="name"
+              placeholder="Your display name">
           </div>
 
           <label for="email">Email address</label>
-          <input id="email" name="email" type="email"
-            autocomplete="email" placeholder="you@example.com" required>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            placeholder="you@example.com"
+            required>
 
           <label for="password">Password</label>
-          <input id="password" name="password" type="password"
-            autocomplete="current-password" minlength="8"
-            placeholder="At least 8 characters" required>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            minlength="8"
+            placeholder="At least 8 characters"
+            required>
 
           <button class="submit" id="submitButton" type="submit">
             Enter MAZÉ
           </button>
 
-          <p class="message" id="message" role="status"></p>
+          <p class="message" id="message" role="status"
+             aria-live="polite"></p>
         </form>
       </section>
     </div>
   </main>
 
   <footer>
-    MAZÉ © Your Space. Your People. Your World.
+    <span>MAZÉ</span> © Your Space. Your People. Your World.
   </footer>
 
   <script>
@@ -298,20 +489,28 @@
 
       loginTab.classList.toggle("active", !signup);
       signupTab.classList.toggle("active", signup);
+
+      loginTab.setAttribute("aria-pressed", String(!signup));
+      signupTab.setAttribute("aria-pressed", String(signup));
+
       nameField.hidden = !signup;
       displayName.required = signup;
+
       password.autocomplete = signup
-        ? "new-password" : "current-password";
+        ? "new-password"
+        : "current-password";
 
       formTitle.textContent = signup
-        ? "Create your account" : "Welcome back";
+        ? "Create your account"
+        : "Welcome back";
 
       formHint.textContent = signup
         ? "Join the MAZÉ community."
         : "Enter your details to continue your journey.";
 
       submitButton.textContent = signup
-        ? "Create Account" : "Enter MAZÉ";
+        ? "Create Account"
+        : "Enter MAZÉ";
 
       message.textContent = "";
     }
@@ -323,9 +522,11 @@
       event.preventDefault();
 
       message.textContent =
-        "The design is ready! Real accounts and secure login " +
-        "will work after we connect an authentication service.";
+        "The MAZÉ interface is ready. Real account creation " +
+        "and secure login will be available after we connect " +
+        "an authentication service.";
     });
   </script>
 </body>
 </html>
+                    
