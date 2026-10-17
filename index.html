@@ -469,64 +469,144 @@
     <span>MAZÉ</span> © Your Space. Your People. Your World.
   </footer>
 
-  <script>
-    const loginTab = document.getElementById("loginTab");
-    const signupTab = document.getElementById("signupTab");
-    const formTitle = document.getElementById("formTitle");
-    const formHint = document.getElementById("formHint");
-    const nameField = document.getElementById("nameField");
-    const displayName = document.getElementById("displayName");
-    const password = document.getElementById("password");
-    const submitButton = document.getElementById("submitButton");
-    const message = document.getElementById("message");
-    const form = document.getElementById("accountForm");
+<script type="module">
+  import { createClient } from
+    "https://esm.sh/@supabase/supabase-js@2";
 
-    let mode = "login";
+  const SUPABASE_URL =
+    "https://bnwabootbfcjxsqyelvi.supabase.co";
 
-    function setMode(nextMode) {
-      mode = nextMode;
-      const signup = mode === "signup";
+  const SUPABASE_KEY =
+    "sb_publishable_ycln0YCMsS6WPbsky4udg_OdB6JmiG";
 
-      loginTab.classList.toggle("active", !signup);
-      signupTab.classList.toggle("active", signup);
+  const supabase = createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
-      loginTab.setAttribute("aria-pressed", String(!signup));
-      signupTab.setAttribute("aria-pressed", String(signup));
+  const loginTab = document.getElementById("loginTab");
+  const signupTab = document.getElementById("signupTab");
+  const formTitle = document.getElementById("formTitle");
+  const formHint = document.getElementById("formHint");
+  const nameField = document.getElementById("nameField");
+  const displayName = document.getElementById("displayName");
+  const password = document.getElementById("password");
+  const email = document.getElementById("email");
+  const submitButton = document.getElementById("submitButton");
+  const message = document.getElementById("message");
+  const form = document.getElementById("accountForm");
 
-      nameField.hidden = !signup;
-      displayName.required = signup;
+  let mode = "login";
+  let busy = false;
 
-      password.autocomplete = signup
-        ? "new-password"
-        : "current-password";
+  function showMessage(text, success = false) {
+    message.textContent = text;
+    message.style.color = success ? "#9ff0c9" : "#fff2bf";
+  }
 
-      formTitle.textContent = signup
-        ? "Create your account"
-        : "Welcome back";
+  function setMode(nextMode) {
+    if (busy) return;
 
-      formHint.textContent = signup
-        ? "Join the MAZÉ community."
-        : "Enter your details to continue your journey.";
+    mode = nextMode;
+    const signup = mode === "signup";
 
-      submitButton.textContent = signup
-        ? "Create Account"
-        : "Enter MAZÉ";
+    loginTab.classList.toggle("active", !signup);
+    signupTab.classList.toggle("active", signup);
 
-      message.textContent = "";
+    loginTab.setAttribute("aria-pressed", String(!signup));
+    signupTab.setAttribute("aria-pressed", String(signup));
+
+    nameField.hidden = !signup;
+    displayName.required = signup;
+
+    password.autocomplete = signup
+      ? "new-password"
+      : "current-password";
+
+    formTitle.textContent = signup
+      ? "Create your account"
+      : "Welcome back";
+
+    formHint.textContent = signup
+      ? "Join the MAZÉ community."
+      : "Enter your details to continue your journey.";
+
+    submitButton.textContent = signup
+      ? "Create Account"
+      : "Enter MAZÉ";
+
+    showMessage("");
+  }
+
+  loginTab.addEventListener("click", () => setMode("login"));
+  signupTab.addEventListener("click", () => setMode("signup"));
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (busy) return;
+
+    busy = true;
+    submitButton.disabled = true;
+    showMessage("Please wait...");
+
+    try {
+      const userEmail = email.value.trim();
+      const userPassword = password.value;
+
+      if (mode === "signup") {
+        const name = displayName.value.trim();
+
+        if (!name) {
+          showMessage("Please enter your display name.");
+          return;
+        }
+
+        const { data, error } = await supabase.auth.signUp({
+          email: userEmail,
+          password: userPassword,
+          options: {
+            data: { display_name: name }
+          }
+        });
+
+        if (error) throw error;
+
+        if (data.session) {
+          showMessage(
+            "Your account was created successfully!",
+            true
+          );
+        } else {
+          showMessage(
+            "Check your email for the confirmation link.",
+            true
+          );
+        }
+      } else {
+        const { error } = await supabase.auth.signInWithPassword({
+          email: userEmail,
+          password: userPassword
+        });
+
+        if (error) throw error;
+
+        showMessage("Login successful! Welcome to MAZÉ.", true);
+      }
+    } catch (error) {
+      showMessage(error.message || "Something went wrong.");
+    } finally {
+      busy = false;
+      submitButton.disabled = false;
     }
+  });
 
-    loginTab.addEventListener("click", () => setMode("login"));
-    signupTab.addEventListener("click", () => setMode("signup"));
+  const { data } = await supabase.auth.getSession();
 
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      message.textContent =
-        "The MAZÉ interface is ready. Real account creation " +
-        "and secure login will be available after we connect " +
-        "an authentication service.";
-    });
-  </script>
+  if (data.session) {
+    showMessage("You're already signed in to MAZÉ.", true);
+  }
+</script>
 </body>
 </html>
                     
